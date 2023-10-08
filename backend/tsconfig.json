@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "lib": ["es2023"],
+    "module": "node16",
+    "target": "es2022",
+    "strict": true,
+    "moduleResolution": "Node16",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "allowJs": true,
+  }
+}

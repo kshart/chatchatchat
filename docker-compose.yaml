@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  postgres:
+    build: db
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER:-user}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-user}"
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+       - postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  socket-proxy:
+    build: socket-proxy
+    ports:
+      - "81:80"
+
+volumes:
+  postgres:
