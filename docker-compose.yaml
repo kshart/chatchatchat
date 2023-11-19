@@ -3,6 +3,7 @@ version: '3.8'
 services:
   postgres:
     build: db
+    hostname: postgres.local
     environment:
       POSTGRES_USER: "${POSTGRES_USER:-user}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-user}"
@@ -11,10 +12,23 @@ services:
        - postgres:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-  socket-proxy:
-    build: socket-proxy
+  # socket-proxy:
+  #   build: socket-proxy
+  #   volumes:
+  #      - ./socket-proxy:/app:delegated
+  #   ports:
+  #     - "81:80"
+  backend:
+    build: backend
+    environment:
+      DATABASE_URL: "postgresql://chat:chat@postgres.local:5432/chatchatchat?schema=chat"
+    volumes:
+       - ./backend:/app:delegated
     ports:
-      - "81:80"
+      - "82:80"
+      - "3000:3000"
+    depends_on:
+      - postgres
 
 volumes:
   postgres:
